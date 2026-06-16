@@ -465,29 +465,100 @@ const tierClass = ["","t1","t2","t3","t4"];
 const tierLabel = ["","Tier 1","Tier 2","Tier 3","Tier 4"];
 const tierCellClass = ["","tc-t1","tc-t2","tc-t3","tc-t4"];
 
-// ── LIVE RESULTS as of June 15, 2026 ────────────────────────────────────────
-// Format: teamName -> { gp, w, d, l, gf, ga, cs, rc, y3, eliminated, advanced, topped }
-// cs = clean sheets, rc = red cards, y3 = matches with 3+ yellows
+// ── LIVE RESULTS as of June 16, 2026 (end of day) ───────────────────────────
+// Fields: gp=games played, w/d/l=wins/draws/losses, gf/ga=goals for/against
+// cs=clean sheets, rc=red cards, y3=matches with 3+ yellows (team level)
+// og=own goals conceded (cost -2 each), loseBy3=lose by 3+ goals (-4)
+// missedPen=missed open play penalties (-1 each)
+// eliminated/advanced/topped updated at end of group stage
 const RESULTS = {
-  // Group A - 1 match played each
-  'Mexico':         { gp:1, w:1, d:0, l:0, gf:2, ga:0, cs:1, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  'South Korea':    { gp:1, w:1, d:0, l:0, gf:2, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  'Czechia':        { gp:1, w:0, d:0, l:1, gf:1, ga:2, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  'South Africa':   { gp:1, w:0, d:0, l:1, gf:0, ga:2, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  // Group B - 1 match played each (all drew 1-1)
-  'Canada':         { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  'Bosnia & Herz.': { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  'Qatar':          { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  'Switzerland':    { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  // Group C
-  'Scotland':       { gp:1, w:1, d:0, l:0, gf:1, ga:0, cs:1, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  'Morocco':        { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  'Brazil':         { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  'Haiti':          { gp:1, w:0, d:0, l:1, gf:0, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  // Group D
-  'United States':  { gp:1, w:1, d:0, l:0, gf:4, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  'Paraguay':       { gp:1, w:0, d:0, l:1, gf:1, ga:4, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
-  // Groups E-L haven't played yet as of June 15
+  // ── GROUP A (Jun 11) ─────────────────────────────────────────────────────
+  // Mexico 2-0 South Africa
+  // RC: South Africa x2 (Sithole 49', Zwane 84'), Mexico x1 (Montes 90'+)
+  'Mexico':          { gp:1, w:1, d:0, l:0, gf:2, ga:0, cs:1, rc:1, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'South Africa':    { gp:1, w:0, d:0, l:1, gf:0, ga:2, cs:0, rc:2, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // South Korea 2-1 Czechia
+  'South Korea':     { gp:1, w:1, d:0, l:0, gf:2, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Czechia':         { gp:1, w:0, d:0, l:1, gf:1, ga:2, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+
+  // ── GROUP B (Jun 12) ─────────────────────────────────────────────────────
+  // Canada 1-1 Bosnia & Herz.
+  'Canada':          { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Bosnia & Herz.':  { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Qatar':           { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Switzerland':     { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+
+  // ── GROUP C (Jun 13) ─────────────────────────────────────────────────────
+  // Brazil 1-1 Morocco
+  'Brazil':          { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Morocco':         { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // Scotland 1-0 Haiti
+  'Scotland':        { gp:1, w:1, d:0, l:0, gf:1, ga:0, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Haiti':           { gp:1, w:0, d:0, l:1, gf:0, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+
+  // ── GROUP D (Jun 12) ─────────────────────────────────────────────────────
+  // USA 4-1 Paraguay — Paraguay lose by 3 = -4
+  'United States':   { gp:1, w:1, d:0, l:0, gf:4, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Paraguay':        { gp:1, w:0, d:0, l:1, gf:1, ga:4, cs:0, rc:0, y3:0, og:0, loseBy3:1, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Australia':       { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Turkey':          { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+
+  // ── GROUP E (Jun 14) ─────────────────────────────────────────────────────
+  // Germany 7-1 Curaçao — Havertz penalty, Curaçao lose by 6 = -4
+  'Germany':         { gp:1, w:1, d:0, l:0, gf:7, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Curaçao':         { gp:1, w:0, d:0, l:1, gf:1, ga:7, cs:0, rc:0, y3:0, og:0, loseBy3:1, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // Ivory Coast 1-0 Ecuador (Amad 90'+)
+  'Ivory Coast':     { gp:1, w:1, d:0, l:0, gf:1, ga:0, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Ecuador':         { gp:1, w:0, d:0, l:1, gf:0, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+
+  // ── GROUP F (Jun 14-15) ──────────────────────────────────────────────────
+  // Netherlands 2-2 Japan — Japan's 2nd goal was a deflection off Kamada (own goal for Netherlands)
+  'Netherlands':     { gp:1, w:0, d:1, l:0, gf:2, ga:2, cs:0, rc:0, y3:0, og:1, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Japan':           { gp:1, w:0, d:1, l:0, gf:2, ga:2, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // Sweden 5-1 Tunisia — Tunisia lose by 4 = -4
+  'Sweden':          { gp:1, w:1, d:0, l:0, gf:5, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Tunisia':         { gp:1, w:0, d:0, l:1, gf:1, ga:5, cs:0, rc:0, y3:0, og:0, loseBy3:1, missedPen:0, eliminated:false, advanced:false, topped:false },
+
+  // ── GROUP G (Jun 15-16) ──────────────────────────────────────────────────
+  // Belgium 1-1 Egypt
+  'Belgium':         { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Egypt':           { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // Iran 2-2 New Zealand
+  'Iran':            { gp:1, w:0, d:1, l:0, gf:2, ga:2, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'New Zealand':     { gp:1, w:0, d:1, l:0, gf:2, ga:2, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+
+  // ── GROUP H (Jun 15) ─────────────────────────────────────────────────────
+  // Spain 0-0 Cape Verde (massive upset draw — Spain tier 1 vs Cape Verde tier 2)
+  'Spain':           { gp:1, w:0, d:1, l:0, gf:0, ga:0, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Cape Verde':      { gp:1, w:0, d:1, l:0, gf:0, ga:0, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // Saudi Arabia 1-1 Uruguay
+  'Saudi Arabia':    { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Uruguay':         { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+
+  // ── GROUP I (Jun 16) ─────────────────────────────────────────────────────
+  // France 3-1 Senegal
+  'France':          { gp:1, w:1, d:0, l:0, gf:3, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Senegal':         { gp:1, w:0, d:0, l:1, gf:1, ga:3, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // Iraq vs Norway — in progress / not yet complete at time of update
+  'Iraq':            { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Norway':          { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+
+  // ── GROUP J (Jun 16 tonight) ─────────────────────────────────────────────
+  // Argentina vs Algeria | Austria vs Jordan — not yet played
+  'Argentina':       { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Algeria':         { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Austria':         { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Jordan':          { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+
+  // ── GROUPS K & L — not yet played ────────────────────────────────────────
+  'Portugal':        { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Colombia':        { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'DR Congo':        { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Uzbekistan':      { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'England':         { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Croatia':         { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Panama':          { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Ghana':           { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
 };
 
 function calcPts(player) {
@@ -498,17 +569,23 @@ function calcPts(player) {
                  team.name === "Cote d'Ivoire" ? 'Ivory Coast' : team.name;
     const r = RESULTS[name];
     if (!r) continue;
-    // Group stage points
-    pts += r.w * 5;           // Win +5
-    pts += r.d * 2;           // Draw +2
-    pts += r.l * -1;          // Loss -1
-    pts += r.gf * 1;          // Goals scored +1 each
-    pts += r.cs * 3;          // Clean sheet +3
-    pts += r.rc * -2;         // Red card -2 each
-    pts += r.y3 * -1;         // 3+ yellows -1
+    // ── Group stage ──────────────────────────────────────────────────────
+    pts += r.w * 5;              // Win +5
+    pts += r.d * 2;              // Draw +2
+    pts += r.l * -1;             // Loss -1
+    pts += r.gf * 1;             // Goals scored +1 each
+    pts += r.cs * 3;             // Clean sheet +3
+    // ── Discipline ───────────────────────────────────────────────────────
+    pts += r.rc * -2;            // Red card -2 each
+    pts += r.y3 * -1;            // 3+ yellows in a match -1
+    pts += (r.og||0) * -2;       // Own goal -2 each
+    pts += (r.missedPen||0) * -1;// Missed penalty -1 each
+    // ── Scoreline penalties ──────────────────────────────────────────────
+    pts += (r.loseBy3||0) * -4;  // Lose by 3+ goals -4
+    // ── Group stage outcomes (set at end of group stage) ─────────────────
     if (r.eliminated) pts -= 3;  // Eliminated in groups -3
-    if (r.advanced) pts += 5;    // Advance from group +5
-    if (r.topped) pts += 5;      // Top the group +5
+    if (r.advanced)   pts += 5;  // Advance from group +5
+    if (r.topped)     pts += 5;  // Top the group +5
   }
   return pts;
 }

@@ -390,7 +390,7 @@ const players = [
   { name: "Dee",      teams: [
     {name:"Netherlands", flag:"🇳🇱", odds:"+1700", tier:1},
     {name:"Switzerland", flag:"🇨🇭", odds:"+7000", tier:2},
-    {name:"Chile",       flag:"🇨🇱", odds:"+25000", tier:3},
+    {name:"Scotland", flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿", odds:"+25000", tier:3},
     {name:"Haiti",       flag:"🇭🇹", odds:"+150000", tier:4}
   ]},
   { name: "Pocholo",  teams: [
@@ -401,33 +401,33 @@ const players = [
   ]},
   { name: "Amanda",   teams: [
     {name:"England",     flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿", odds:"+700", tier:1},
-    {name:"USA",         flag:"🇺🇸", odds:"+5500", tier:2},
+    {name:"United States", flag:"🇺🇸", odds:"+5500", tier:2},
     {name:"Iran",        flag:"🇮🇷", odds:"+25000", tier:3},
     {name:"Qatar",       flag:"🇶🇦", odds:"+75000", tier:4}
   ]},
   { name: "Amber",    teams: [
     {name:"Belgium",     flag:"🇧🇪", odds:"+2200", tier:1},
     {name:"Ecuador",     flag:"🇪🇨", odds:"+12000", tier:2},
-    {name:"Poland",      flag:"🇵🇱", odds:"+20000", tier:3},
+    {name:"Czechia", flag:"🇨🇿", odds:"+20000", tier:3},
     {name:"Ghana",       flag:"🇬🇭", odds:"+50000", tier:4}
   ]},
   { name: "Glenn",    teams: [
     {name:"Norway",      flag:"🇳🇴", odds:"+3300", tier:1},
     {name:"Senegal",     flag:"🇸🇳", odds:"+12000", tier:2},
-    {name:"Slovakia",    flag:"🇸🇰", odds:"+35000", tier:3},
+    {name:"Uzbekistan", flag:"🇺🇿", odds:"+35000", tier:3},
     {name:"Cape Verde",  flag:"🇨🇻", odds:"+100000", tier:4}
   ]},
   { name: "Kenny",    teams: [
     {name:"Germany",     flag:"🇩🇪", odds:"+1300", tier:1},
     {name:"Croatia",     flag:"🇭🇷", odds:"+8000", tier:2},
-    {name:"Denmark",     flag:"🇩🇰", odds:"+15000", tier:3},
+    {name:"Sweden", flag:"🇸🇪", odds:"+15000", tier:3},
     {name:"Algeria",     flag:"🇩🇿", odds:"+40000", tier:4}
   ]},
   { name: "Dylan",    teams: [
     {name:"Mexico",      flag:"🇲🇽", odds:"+5000", tier:1},
     {name:"Turkey",      flag:"🇹🇷", odds:"+6500", tier:2},
-    {name:"Hungary",     flag:"🇭🇺", odds:"+25000", tier:3},
-    {name:"Cameroon",    flag:"🇨🇲", odds:"+40000", tier:4}
+    {name:"Iraq", flag:"🇮🇶", odds:"+25000", tier:3},
+    {name:"DR Congo", flag:"🇨🇩", odds:"+40000", tier:4}
   ]},
   { name: "Eddie",    teams: [
     {name:"Portugal",    flag:"🇵🇹", odds:"+800", tier:1},
@@ -438,25 +438,25 @@ const players = [
   { name: "Marcello", teams: [
     {name:"Brazil",      flag:"🇧🇷", odds:"+900", tier:1},
     {name:"Uruguay",     flag:"🇺🇾", odds:"+5500", tier:2},
-    {name:"Serbia",      flag:"🇷🇸", odds:"+20000", tier:3},
+    {name:"Jordan", flag:"🇯🇴", odds:"+20000", tier:3},
     {name:"Panama",      flag:"🇵🇦", odds:"+80000", tier:4}
   ]},
   { name: "Austin",   teams: [
     {name:"Spain",       flag:"🇪🇸", odds:"+450", tier:1},
     {name:"Japan",       flag:"🇯🇵", odds:"+5000", tier:2},
     {name:"Paraguay",    flag:"🇵🇾", odds:"+30000", tier:3},
-    {name:"Nigeria",     flag:"🇳🇬", odds:"+40000", tier:4}
+    {name:"Bosnia & Herz.", flag:"🇧🇦", odds:"+40000", tier:4}
   ]},
   { name: "Logan",    teams: [
     {name:"France",      flag:"🇫🇷", odds:"+500", tier:1},
     {name:"Australia",   flag:"🇦🇺", odds:"+15000", tier:2},
-    {name:"Venezuela",   flag:"🇻🇪", odds:"+25000", tier:3},
-    {name:"Cote d'Ivoire",flag:"🇨🇮", odds:"+50000", tier:4}
+    {name:"Curaçao", flag:"🇨🇼", odds:"+100000", tier:4},
+    {name:"Ivory Coast", flag:"🇨🇮", odds:"+50000", tier:4}
   ]},
   { name: "Izzy",     teams: [
     {name:"Colombia",    flag:"🇨🇴", odds:"+4000", tier:1},
     {name:"Morocco",     flag:"🇲🇦", odds:"+5000", tier:2},
-    {name:"Ukraine",     flag:"🇺🇦", odds:"+20000", tier:3},
+    {name:"South Africa", flag:"🇿🇦", odds:"+50000", tier:4},
     {name:"Egypt",       flag:"🇪🇬", odds:"+50000", tier:4}
   ]},
 ];
@@ -465,8 +465,56 @@ const tierClass = ["","t1","t2","t3","t4"];
 const tierLabel = ["","Tier 1","Tier 2","Tier 3","Tier 4"];
 const tierCellClass = ["","tc-t1","tc-t2","tc-t3","tc-t4"];
 
+// ── LIVE RESULTS as of June 15, 2026 ────────────────────────────────────────
+// Format: teamName -> { gp, w, d, l, gf, ga, cs, rc, y3, eliminated, advanced, topped }
+// cs = clean sheets, rc = red cards, y3 = matches with 3+ yellows
+const RESULTS = {
+  // Group A - 1 match played each
+  'Mexico':         { gp:1, w:1, d:0, l:0, gf:2, ga:0, cs:1, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  'South Korea':    { gp:1, w:1, d:0, l:0, gf:2, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  'Czechia':        { gp:1, w:0, d:0, l:1, gf:1, ga:2, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  'South Africa':   { gp:1, w:0, d:0, l:1, gf:0, ga:2, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  // Group B - 1 match played each (all drew 1-1)
+  'Canada':         { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  'Bosnia & Herz.': { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  'Qatar':          { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  'Switzerland':    { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  // Group C
+  'Scotland':       { gp:1, w:1, d:0, l:0, gf:1, ga:0, cs:1, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  'Morocco':        { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  'Brazil':         { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  'Haiti':          { gp:1, w:0, d:0, l:1, gf:0, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  // Group D
+  'United States':  { gp:1, w:1, d:0, l:0, gf:4, ga:1, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  'Paraguay':       { gp:1, w:0, d:0, l:1, gf:1, ga:4, cs:0, rc:0, y3:0, eliminated:false, advanced:false, topped:false },
+  // Groups E-L haven't played yet as of June 15
+};
+
+function calcPts(player) {
+  let pts = 0;
+  for (const team of player.teams) {
+    // Normalize team name
+    const name = team.name === 'USA' ? 'United States' : 
+                 team.name === "Cote d'Ivoire" ? 'Ivory Coast' : team.name;
+    const r = RESULTS[name];
+    if (!r) continue;
+    // Group stage points
+    pts += r.w * 5;           // Win +5
+    pts += r.d * 2;           // Draw +2
+    pts += r.l * -1;          // Loss -1
+    pts += r.gf * 1;          // Goals scored +1 each
+    pts += r.cs * 3;          // Clean sheet +3
+    pts += r.rc * -2;         // Red card -2 each
+    pts += r.y3 * -1;         // 3+ yellows -1
+    if (r.eliminated) pts -= 3;  // Eliminated in groups -3
+    if (r.advanced) pts += 5;    // Advance from group +5
+    if (r.topped) pts += 5;      // Top the group +5
+  }
+  return pts;
+}
+
 function buildLeaderboard() {
-  const sorted = [...players].map(p => ({...p, pts: 0})).sort((a,b) => b.pts - a.pts);
+  const sorted = [...players].map(p => ({...p, pts: calcPts(p)})).sort((a,b) => b.pts - a.pts);
   const list = document.getElementById('leaderboard-list');
   list.innerHTML = '';
   sorted.forEach((p, i) => {

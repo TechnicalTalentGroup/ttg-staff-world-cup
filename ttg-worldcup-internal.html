@@ -465,100 +465,92 @@ const tierClass = ["","t1","t2","t3","t4"];
 const tierLabel = ["","Tier 1","Tier 2","Tier 3","Tier 4"];
 const tierCellClass = ["","tc-t1","tc-t2","tc-t3","tc-t4"];
 
-// ── LIVE RESULTS as of June 16, 2026 (end of day) ───────────────────────────
-// Fields: gp=games played, w/d/l=wins/draws/losses, gf/ga=goals for/against
-// cs=clean sheets, rc=red cards, y3=matches with 3+ yellows (team level)
-// og=own goals conceded (cost -2 each), loseBy3=lose by 3+ goals (-4)
-// missedPen=missed open play penalties (-1 each)
-// eliminated/advanced/topped updated at end of group stage
+// ── LIVE RESULTS as of June 23, 2026 ────────────────────────────────────────
+// Note: Colombia/DR Congo and Panama/Croatia in progress tonight - not yet final
 const RESULTS = {
-  // ── GROUP A (Jun 11) ─────────────────────────────────────────────────────
-  // Mexico 2-0 South Africa
-  // RC: South Africa x2 (Sithole 49', Zwane 84'), Mexico x1 (Montes 90'+)
-  'Mexico':          { gp:1, w:1, d:0, l:0, gf:2, ga:0, cs:1, rc:1, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'South Africa':    { gp:1, w:0, d:0, l:1, gf:0, ga:2, cs:0, rc:2, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  // South Korea 2-1 Czechia
-  'South Korea':     { gp:1, w:1, d:0, l:0, gf:2, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Czechia':         { gp:1, w:0, d:0, l:1, gf:1, ga:2, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // GROUP A — 2 games each (3rd game Jun 24)
+  'Mexico':          { gp:2, w:2, d:0, l:0, gf:3, ga:0, cs:2, rc:1, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:true,  topped:true  },
+  'South Korea':     { gp:2, w:1, d:0, l:1, gf:2, ga:2, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Czechia':         { gp:2, w:0, d:1, l:1, gf:2, ga:3, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'South Africa':    { gp:2, w:0, d:1, l:1, gf:1, ga:3, cs:0, rc:2, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
 
-  // ── GROUP B (Jun 12) ─────────────────────────────────────────────────────
-  // Canada 1-1 Bosnia & Herz.
-  'Canada':          { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Bosnia & Herz.':  { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Qatar':           { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Switzerland':     { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // GROUP B — 2 games each (3rd game Jun 24)
+  'Canada':          { gp:2, w:1, d:1, l:0, gf:7, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Switzerland':     { gp:2, w:1, d:1, l:0, gf:5, ga:2, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Bosnia & Herz.':  { gp:2, w:0, d:1, l:1, gf:2, ga:5, cs:0, rc:0, y3:0, og:1, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Qatar':           { gp:2, w:0, d:1, l:1, gf:1, ga:7, cs:0, rc:1, y3:0, og:0, loseBy3:1, missedPen:0, eliminated:false, advanced:false, topped:false },
 
-  // ── GROUP C (Jun 13) ─────────────────────────────────────────────────────
-  // Brazil 1-1 Morocco
-  'Brazil':          { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Morocco':         { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  // Scotland 1-0 Haiti
-  'Scotland':        { gp:1, w:1, d:0, l:0, gf:1, ga:0, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Haiti':           { gp:1, w:0, d:0, l:1, gf:0, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // GROUP C — 2 games each (3rd game Jun 24)
+  // Jun 13: Brazil 1-1 Morocco, Scotland 1-0 Haiti | Jun 19: Morocco 1-0 Scotland, Brazil 3-0 Haiti
+  'Brazil':          { gp:2, w:1, d:1, l:0, gf:4, ga:1, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:true  },
+  'Morocco':         { gp:2, w:1, d:1, l:0, gf:2, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Scotland':        { gp:2, w:1, d:0, l:1, gf:1, ga:1, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Haiti':           { gp:2, w:0, d:0, l:2, gf:0, ga:4, cs:0, rc:0, y3:0, og:0, loseBy3:1, missedPen:0, eliminated:true,  advanced:false, topped:false },
 
-  // ── GROUP D (Jun 12) ─────────────────────────────────────────────────────
-  // USA 4-1 Paraguay — Paraguay lose by 3 = -4
-  'United States':   { gp:1, w:1, d:0, l:0, gf:4, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Paraguay':        { gp:1, w:0, d:0, l:1, gf:1, ga:4, cs:0, rc:0, y3:0, og:0, loseBy3:1, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Australia':       { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Turkey':          { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // GROUP D — 2 games each (3rd game Jun 25)
+  // Jun 12: USA 4-1 Paraguay, Jun 13: Australia 2-0 Turkey | Jun 19: USA 2-0 Australia, Turkey 0-1 Paraguay
+  'United States':   { gp:2, w:2, d:0, l:0, gf:6, ga:1, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:true,  topped:true  },
+  'Australia':       { gp:2, w:1, d:0, l:1, gf:2, ga:2, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Paraguay':        { gp:2, w:1, d:0, l:1, gf:2, ga:4, cs:0, rc:0, y3:0, og:0, loseBy3:1, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Turkey':          { gp:2, w:0, d:0, l:2, gf:0, ga:3, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
 
-  // ── GROUP E (Jun 14) ─────────────────────────────────────────────────────
-  // Germany 7-1 Curaçao — Havertz penalty, Curaçao lose by 6 = -4
-  'Germany':         { gp:1, w:1, d:0, l:0, gf:7, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Curaçao':         { gp:1, w:0, d:0, l:1, gf:1, ga:7, cs:0, rc:0, y3:0, og:0, loseBy3:1, missedPen:0, eliminated:false, advanced:false, topped:false },
-  // Ivory Coast 1-0 Ecuador (Amad 90'+)
-  'Ivory Coast':     { gp:1, w:1, d:0, l:0, gf:1, ga:0, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Ecuador':         { gp:1, w:0, d:0, l:1, gf:0, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // GROUP E — 2 games each (3rd game Jun 25)
+  // Jun 14: Germany 7-1 Curacao, Ivory Coast 1-0 Ecuador | Jun 20: Germany 2-1 Ivory Coast, Ecuador 0-0 Curacao
+  'Germany':         { gp:2, w:2, d:0, l:0, gf:9, ga:2, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:true,  topped:true  },
+  'Ivory Coast':     { gp:2, w:1, d:0, l:1, gf:2, ga:2, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Ecuador':         { gp:2, w:0, d:1, l:1, gf:0, ga:1, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Curaçao':         { gp:2, w:0, d:1, l:1, gf:1, ga:7, cs:0, rc:0, y3:0, og:0, loseBy3:1, missedPen:0, eliminated:false, advanced:false, topped:false },
 
-  // ── GROUP F (Jun 14-15) ──────────────────────────────────────────────────
-  // Netherlands 2-2 Japan — Japan's 2nd goal was a deflection off Kamada (own goal for Netherlands)
-  'Netherlands':     { gp:1, w:0, d:1, l:0, gf:2, ga:2, cs:0, rc:0, y3:0, og:1, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Japan':           { gp:1, w:0, d:1, l:0, gf:2, ga:2, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  // Sweden 5-1 Tunisia — Tunisia lose by 4 = -4
-  'Sweden':          { gp:1, w:1, d:0, l:0, gf:5, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Tunisia':         { gp:1, w:0, d:0, l:1, gf:1, ga:5, cs:0, rc:0, y3:0, og:0, loseBy3:1, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // GROUP F — 2 games each (3rd game Jun 25)
+  // Jun 14: Netherlands 2-2 Japan, Sweden 5-1 Tunisia | Jun 20: Netherlands 5-1 Sweden, Japan 4-0 Tunisia
+  'Japan':           { gp:2, w:1, d:1, l:0, gf:6, ga:2, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:true  },
+  'Netherlands':     { gp:2, w:1, d:1, l:0, gf:7, ga:3, cs:0, rc:0, y3:0, og:1, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Sweden':          { gp:2, w:1, d:0, l:1, gf:6, ga:6, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Tunisia':         { gp:2, w:0, d:0, l:2, gf:1, ga:9, cs:0, rc:0, y3:0, og:0, loseBy3:2, missedPen:0, eliminated:true,  advanced:false, topped:false },
 
-  // ── GROUP G (Jun 15-16) ──────────────────────────────────────────────────
-  // Belgium 1-1 Egypt
-  'Belgium':         { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Egypt':           { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  // Iran 2-2 New Zealand
-  'Iran':            { gp:1, w:0, d:1, l:0, gf:2, ga:2, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'New Zealand':     { gp:1, w:0, d:1, l:0, gf:2, ga:2, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // GROUP G — 2 games each (3rd game Jun 26)
+  // Jun 15: Belgium 1-1 Egypt, Iran 2-2 New Zealand | Jun 21: Belgium 0-0 Iran, Egypt 3-1 New Zealand
+  'Egypt':           { gp:2, w:1, d:1, l:0, gf:4, ga:2, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:true  },
+  'New Zealand':     { gp:2, w:0, d:1, l:1, gf:3, ga:5, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Iran':            { gp:2, w:0, d:2, l:0, gf:2, ga:2, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Belgium':         { gp:2, w:0, d:2, l:0, gf:1, ga:1, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
 
-  // ── GROUP H (Jun 15) ─────────────────────────────────────────────────────
-  // Spain 0-0 Cape Verde (massive upset draw — Spain tier 1 vs Cape Verde tier 2)
-  'Spain':           { gp:1, w:0, d:1, l:0, gf:0, ga:0, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Cape Verde':      { gp:1, w:0, d:1, l:0, gf:0, ga:0, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  // Saudi Arabia 1-1 Uruguay
-  'Saudi Arabia':    { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Uruguay':         { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // GROUP H — 2 games each (3rd game Jun 26)
+  // Jun 15: Spain 0-0 Cape Verde, Saudi Arabia 1-1 Uruguay | Jun 21: Spain 4-0 Saudi Arabia, Uruguay 2-2 Cape Verde
+  'Spain':           { gp:2, w:1, d:1, l:0, gf:4, ga:0, cs:2, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:true  },
+  'Uruguay':         { gp:2, w:0, d:2, l:0, gf:3, ga:3, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Cape Verde':      { gp:2, w:0, d:2, l:0, gf:2, ga:4, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Saudi Arabia':    { gp:2, w:0, d:1, l:1, gf:1, ga:5, cs:0, rc:0, y3:0, og:0, loseBy3:1, missedPen:0, eliminated:false, advanced:false, topped:false },
 
-  // ── GROUP I (Jun 16) ─────────────────────────────────────────────────────
-  // France 3-1 Senegal
-  'France':          { gp:1, w:1, d:0, l:0, gf:3, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Senegal':         { gp:1, w:0, d:0, l:1, gf:1, ga:3, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  // Iraq vs Norway — in progress / not yet complete at time of update
-  'Iraq':            { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Norway':          { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // GROUP I — 2 games each (3rd game Jun 26)
+  // Jun 16: France 3-1 Senegal, Norway 4-1 Iraq | Jun 22: France 3-0 Iraq, Norway 3-2 Senegal
+  // Note Jun 22 Iraq own goal (Aymen Hussein deflection off Norway's 4th goal in first game also OG)
+  'France':          { gp:2, w:2, d:0, l:0, gf:6, ga:1, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:true,  topped:false },
+  'Norway':          { gp:2, w:2, d:0, l:0, gf:7, ga:3, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:true,  topped:false },
+  'Senegal':         { gp:2, w:0, d:0, l:2, gf:3, ga:6, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Iraq':            { gp:2, w:0, d:0, l:2, gf:1, ga:7, cs:0, rc:0, y3:0, og:1, loseBy3:1, missedPen:0, eliminated:true,  advanced:false, topped:false },
 
-  // ── GROUP J (Jun 16 tonight) ─────────────────────────────────────────────
-  // Argentina vs Algeria | Austria vs Jordan — not yet played
-  'Argentina':       { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Algeria':         { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Austria':         { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Jordan':          { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // GROUP J — 2 games each (3rd game Jun 27)
+  // Jun 16: Argentina 3-0 Algeria, Jun 17: Austria 3-1 Jordan | Jun 22: Argentina 2-0 Austria, Jordan 1-2 Algeria
+  'Argentina':       { gp:2, w:2, d:0, l:0, gf:5, ga:0, cs:2, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:true,  topped:true  },
+  'Algeria':         { gp:2, w:1, d:0, l:1, gf:2, ga:3, cs:0, rc:0, y3:0, og:0, loseBy3:1, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Austria':         { gp:2, w:1, d:0, l:1, gf:3, ga:3, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Jordan':          { gp:2, w:0, d:0, l:2, gf:2, ga:6, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
 
-  // ── GROUPS K & L — not yet played ────────────────────────────────────────
-  'Portugal':        { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Colombia':        { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'DR Congo':        { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Uzbekistan':      { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'England':         { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Croatia':         { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Panama':          { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
-  'Ghana':           { gp:0, w:0, d:0, l:0, gf:0, ga:0, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  // GROUP K — Portugal 2 games, Colombia 1 game, DR Congo 1 game, Uzbekistan 2 games
+  // Jun 17: Portugal 1-1 DR Congo, Colombia 3-1 Uzbekistan | Jun 23: Portugal 5-0 Uzbekistan
+  // Colombia vs DR Congo tonight — not yet played
+  'Portugal':        { gp:2, w:1, d:1, l:0, gf:6, ga:1, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:true  },
+  'Colombia':        { gp:1, w:1, d:0, l:0, gf:3, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'DR Congo':        { gp:1, w:0, d:1, l:0, gf:1, ga:1, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Uzbekistan':      { gp:2, w:0, d:0, l:2, gf:1, ga:8, cs:0, rc:0, y3:0, og:0, loseBy3:1, missedPen:0, eliminated:false, advanced:false, topped:false },
+
+  // GROUP L — 2 games each except Panama/Croatia (finishing tonight)
+  // Jun 17: England 4-2 Croatia, Ghana 1-0 Panama | Jun 23: England 0-0 Ghana, Croatia 1-0 Panama (finishing)
+  'England':         { gp:2, w:1, d:1, l:0, gf:4, ga:2, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Ghana':           { gp:2, w:1, d:1, l:0, gf:1, ga:0, cs:2, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Croatia':         { gp:2, w:1, d:0, l:1, gf:3, ga:4, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:false, topped:false },
+  'Panama':          { gp:2, w:0, d:0, l:2, gf:0, ga:2, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:true,  advanced:false, topped:false },
 };
 
 function calcPts(player) {

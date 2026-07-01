@@ -500,7 +500,7 @@ const RESULTS = {
   // GROUP E — FINAL: Germany 6pts, Ivory Coast 6pts, Ecuador 4pts, Curaçao 1pt
   // Jun 14: Germany 7-1 Curacao, Ivory Coast 1-0 Ecuador | Jun 20: Germany 2-1 Ivory Coast, Ecuador 0-0 Curacao | Jun 25: Germany 1-2 Ecuador, Ivory Coast 3-0 Curacao
   'Germany':         { gp:3, w:2, d:0, l:1, gf:10,ga:4, cs:0, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:true,  topped:true  },
-  'Ivory Coast':     { gp:3, w:2, d:0, l:1, gf:4, ga:2, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:true,  topped:false },
+  'Ivory Coast':     { gp:3, w:2, d:0, l:1, gf:4, ga:2, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:true,  topped:false }, // R32 loss to Norway
   'Ecuador':         { gp:3, w:1, d:1, l:1, gf:2, ga:2, cs:1, rc:0, y3:0, og:0, loseBy3:0, missedPen:0, eliminated:false, advanced:true,  topped:false },
   'Curaçao':         { gp:3, w:0, d:1, l:2, gf:1, ga:9, cs:0, rc:0, y3:0, og:0, loseBy3:2, missedPen:0, eliminated:true,  advanced:false, topped:false },
 
@@ -586,7 +586,7 @@ function calcPts(player) {
 // KO_WINS tracks which teams have won each knockout round
 // Updated manually as R32/R16/QF/SF/Final results come in
 const KO_WINS = {
-  r32:  ['Canada'],  // Jun 28: Canada beat South Africa 1-0
+  r32:  ['Canada', 'Brazil', 'Paraguay', 'Morocco', 'Norway', 'France', 'Mexico'],
   r16:  [],
   qf:   [],
   sf:   [],
